@@ -47,6 +47,9 @@
 #include "CSCDQM_Configuration.h"
 #include "CSCDQM_Dispatcher.h"
 
+//Token dataformat
+#include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
+
 /// Local stuff
 #include "CSCMonitorObject.h"
 
@@ -85,6 +88,10 @@ class CSCMonitorModule: public edm::EDAnalyzer, public cscdqm::MonitorObjectProv
     edm::InputTag             inputTag;
     bool                      prebookEffParams;
     bool                      processDcsScalers;
+
+    //define Token(-s)
+    edm::EDGetTokenT<DcsStatusCollection> dcsStatusToken_;
+    edm::EDGetTokenT<FEDRawDataCollection> inputToken_;
 
     /** Pointer to crate mapping from database **/
     const CSCCrateMap* pcrate;

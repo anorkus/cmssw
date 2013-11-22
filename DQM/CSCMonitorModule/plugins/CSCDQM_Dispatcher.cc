@@ -196,7 +196,7 @@ namespace cscdqm {
    * @param  inputTag Tag to search Event Data in
    * @return 
    */
-  void Dispatcher::processEvent(const edm::Event& e, const edm::InputTag& inputTag, HWStandbyType& standby) {
+  void Dispatcher::processEvent(const edm::Event& e, const edm::EDGetTokenT<FEDRawDataCollection>& inputToken_, HWStandbyType& standby) {
     config->eventProcessTimer(true);
      
     // Consider standby information
@@ -220,7 +220,7 @@ namespace cscdqm {
 
     }
 
-    processor.processEvent(e, inputTag);
+    processor.processEvent(e, inputToken_);
 
     config->eventProcessTimer(false);
 

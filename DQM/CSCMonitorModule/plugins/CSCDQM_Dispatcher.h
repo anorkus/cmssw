@@ -32,6 +32,8 @@
 #include "CSCDQM_Logger.h"
 #include "CSCDQM_Lock.h"
 
+#include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
+
 namespace cscdqm {
 
   /**
@@ -179,7 +181,7 @@ namespace cscdqm {
 
     public:
 
-      void processEvent(const edm::Event& e, const edm::InputTag& inputTag, HWStandbyType& standby);
+      void processEvent(const edm::Event& e, const edm::EDGetTokenT<FEDRawDataCollection>& inputToken_, HWStandbyType& standby);
 
 #endif      
 

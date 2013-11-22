@@ -144,15 +144,15 @@ void EventProcessor::processEvent(const char* data, const int32_t dataSize, cons
  * @param  standby HW standby status indicator
  * @return
  */
-void EventProcessor::processEvent(const edm::Event& e, const edm::InputTag& inputTag)
+void EventProcessor::processEvent(const edm::Event& e, const edm::EDGetTokenT<FEDRawDataCollection>& inputToken_)
 {
 
   preProcessEvent();
 
   edm::Handle<FEDRawDataCollection> rawdata;
-  if (!e.getByLabel(inputTag, rawdata))
+  if (!e.getByToken(inputToken_, rawdata))
     {
-      LOG_WARN << "No product: " << inputTag << " in stream";
+      //LOG_WARN << "No product: " << inputToken_ << " in stream";
       return;
     }
 
@@ -170,9 +170,10 @@ void EventProcessor::processEvent(const edm::Event& e, const edm::InputTag& inpu
 
   /*
   const edm::InputTag formatStatusCollectionTag("MuonCSCDCCFormatStatusDigi");
+  formatStatusCollectionToken_ = consumes<CSCDCCFormatStatusDigiCollection>(formatStatusCollectionTag); //move to constructor
   bool processFormatStatusDigi = true;
   edm::Handle<CSCDCCFormatStatusDigiCollection> formatStatusColl;
-  if (!e.getByLabel(formatStatusCollectionTag, formatStatusColl)) {
+  if (!e.getByToken_(formatStatusCollectionToken_, formatStatusColl)) {
     LOG_WARN << "No product: " << formatStatusCollectionTag << " in stream";
     processFormatStatusDigi = false;
   }

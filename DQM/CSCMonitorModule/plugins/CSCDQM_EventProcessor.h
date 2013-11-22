@@ -49,6 +49,8 @@
 #include "DataFormats/CSCDigi/interface/CSCDCCFormatStatusDigi.h"
 #include "DataFormats/CSCDigi/interface/CSCDCCFormatStatusDigiCollection.h"
 
+#include "FWCore/Framework/interface/ConsumesCollector.h"
+
 namespace cscdqm {
 
   /**
@@ -197,7 +199,7 @@ namespace cscdqm {
 
     public:
 
-      void processEvent(const edm::Event& e, const edm::InputTag& inputTag);
+      void processEvent(const edm::Event& e, const edm::EDGetTokenT<FEDRawDataCollection>& inputToken_);
 
 #endif      
 

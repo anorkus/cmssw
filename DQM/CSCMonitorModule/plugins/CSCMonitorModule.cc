@@ -45,6 +45,9 @@ CSCMonitorModule::CSCMonitorModule(const edm::ParameterSet& ps) {
     dispatcher->maskHWElements(maskedHW);
   }
 
+  //set Token(-s)
+  dcsStatusToken_ = consumes<DcsStatusCollection>(std::string("scalersRawToDigi"));
+  inputToken_ = consumes<FEDRawDataCollection>(ps.getUntrackedParameter<edm::InputTag>("InputObjects", (edm::InputTag)INPUT_TAG_LABEL));
 }
 
 /**
@@ -84,7 +87,7 @@ void CSCMonitorModule::analyze(const edm::Event& e, const edm::EventSetup& c) {
   // Get DCS status scalers
   if (processDcsScalers) {
     edm::Handle<DcsStatusCollection> dcsStatus;
-    if (e.getByLabel("scalersRawToDigi", dcsStatus)) {
+    if (e.getByToken(dcsStatusToken_, dcsStatus)) {
       DcsStatusCollection::const_iterator dcsStatusItr = dcsStatus->begin();
       for (; dcsStatusItr != dcsStatus->end(); ++dcsStatusItr) {
         standby.applyMeP(dcsStatusItr->ready(DcsStatus::CSCp));
@@ -94,7 +97,7 @@ void CSCMonitorModule::analyze(const edm::Event& e, const edm::EventSetup& c) {
     standby.process = true;
   }
 
-  dispatcher->processEvent(e, inputTag, standby);
+  dispatcher->processEvent(e, inputToken_, standby);
 
 }
 
