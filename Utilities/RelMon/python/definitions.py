@@ -163,7 +163,6 @@ hlt_mc_pattern_blist_pairs=(\
         ("!(TTbar+|JpsiMM+|SingleMu+)", "Muon@2"),
         ("!(TTbar+)", "Jet@2,JET@2,Met@2,MET@2,Top@2"),
         ("!(TTbar+|ChargedTaus+|QQH135+|ZTT+)", "Tau@2"),
-        ("!(TTbar+|H130GGgluon+|ChargedTaus+|QQH135+|Hbb+)", "Higgs@2"),
         ("!(TTbar+|JpsiMM+)", "HeavyFlavor@2"),
         ("!(TTbar+|LM1+|SGrav+|ZPrime+)", "SusyExo@2"))
 
